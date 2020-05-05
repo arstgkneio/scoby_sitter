@@ -1,0 +1,8 @@
+sh: 1: modprobe: not found
+sh: 1: modprobe: not found
+Traceback (most recent call last):
+  File "/home/pi/BuchaMonitor/RaspBucha_Display.py", line 233, in <module>
+    update_temp_data_label()
+  File "/home/pi/BuchaMonitor/RaspBucha_Display.py", line 94, in update_temp_data_label
+    temperature = raw_data_line.split(',')[1]
+IndexError: list index out of range
