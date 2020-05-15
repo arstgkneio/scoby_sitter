@@ -68,15 +68,24 @@ def get_extrema(last_n_hours):
             break
 
     # Finding min/max values in dictionary and corresponding key
-
     dt_min_temperat = min(hour_range_data, key=hour_range_data.get)
+    #print(dt_min_temperat)
     min_temperat = hour_range_data.get(dt_min_temperat)
+    #print(min_temperat)
 
     dt_max_temperat = max(hour_range_data, key=hour_range_data.get)
     max_temperat = hour_range_data.get(dt_max_temperat)
 
+    # Convert datetimes to day, month, hour, minute format 
+    dt_min_temperat = datetime.datetime.strptime(dt_min_temperat, "%Y-%m-%d %H:%M:%S.%f")
+    dt_min_temperat = datetime.datetime.strftime(dt_min_temperat, "%d %b %H:%M")
+
+
+    dt_max_temperat = datetime.datetime.strptime(dt_max_temperat, "%Y-%m-%d %H:%M:%S.%f")
+    dt_max_temperat = datetime.datetime.strftime(dt_max_temperat, "%d %b %H:%M")
 
     return(float(min_temperat), dt_min_temperat, float(max_temperat), dt_max_temperat)
+
 #
 # min_temperat, dt_min_temperat, max_temperat, dt_max_temperat = get_extrema()
 #

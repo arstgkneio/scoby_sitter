@@ -11,9 +11,13 @@ import extrema
 #===============================================================================
 
 # SETTINGS
-#=======================================================================================================================================
-my_resolution = 0  #auto-detects if 0
+#===============================================================================
+#the resolution of the window
+#default: 0, sets to screen's res
+my_resolution = 0
 fullscreen_boolean = False
+
+#the time window in hours, when calculating min/max temps
 MIN_MAX_TIME_RANGE = 24
 
 # Gets the canonical path, eliminating any symbolic links
@@ -22,7 +26,7 @@ module_path = inspect.getfile(inspect.currentframe())
 # Builds working directory using canonical path
 module_dir = os.path.realpath(os.path.dirname(module_path))
 
-# Folder containing .csv files
+# Folder containing .csv data files
 path = module_dir + "/bucha_logs"
 file_prefix = 'bucha_log'
 
@@ -30,7 +34,7 @@ file_prefix = 'bucha_log'
 padding_char = '_'
 
 # FUNCTIONS
-#=======================================================================================================================================
+#===============================================================================
 
 
 # Function to retrieve the last line from most recent file
@@ -67,7 +71,7 @@ def update_title_label():
 
 
 # TEMPERATURE
-#======================================================================================================================================
+#===============================================================================
 def update_temp_title_label():
     temp_title_label['bg'] = update_bg_color('0')
 
@@ -98,10 +102,10 @@ def update_max_temp_title_label():
     max_temp_title_label.after(5000, update_max_temp_title_label)
 
 def update_min_temp_data_label():
-    min_temperat, dt_min_temperat, max_temperat, dt_max_temperat = extrema.get_extrema(last_n_hours = MIN_MAX_TIME_RANGE)
+    min_temperat, dt_min_temperat, min_temperat, dt_min_temperat = extrema.get_extrema(last_n_hours = MIN_MAX_TIME_RANGE)
 
     min_temp_data_label['bg'] = update_bg_color('0')
-
+    #type(min_temperat)
     min_temp_data_label['text'] = "{:6.1f}".format(min_temperat)
 
     min_temp_data_label.after(5000, update_min_temp_data_label)
@@ -128,7 +132,7 @@ def update_max_temp_unit_label():
 
 
 # TIME
-#=====================================================================================================================
+#===============================================================================
 
 
 # Function to update clock_label widget with system clock reading
@@ -160,12 +164,29 @@ def update_time_last_measurement_label():
 
     time_last_measurement_label.after(5000, update_time_last_measurement_label)
 
+def update_time_min_temp_label():
+    min_temperat, dt_min_temperat, max_temperat, dt_max_temperat = extrema.get_extrema(last_n_hours = MIN_MAX_TIME_RANGE)
+
+    time_min_temp_label['bg'] = update_bg_color('0')
+
+    time_min_temp_label['text'] = "{:s}".format(dt_min_temperat)
+
+    time_min_temp_label.after(5000, update_time_min_temp_label)
+
+def update_time_max_temp_label():
+    min_temperat, dt_min_temperat, max_temperat, dt_max_temperat = extrema.get_extrema(last_n_hours = MIN_MAX_TIME_RANGE)
+
+    time_max_temp_label['bg'] = update_bg_color('0')
+
+    time_max_temp_label['text'] = "{:s}".format(dt_max_temperat)
+
+    time_max_temp_label.after(5000, update_time_max_temp_label)
 
 
 
 
 # MAIN FUNCTION
-#======================================================================================================================================
+#===============================================================================
 
 # Create the main window and set its attributes
 my_window = tk.Tk()
@@ -200,7 +221,7 @@ update_clock_label()
 
 
 # Create the temp_title_label widget
-temp_title_label = tk.Label(my_window, text='Temperature'.ljust(23,padding_char), font='courier 45', fg='gray')
+temp_title_label = tk.Label(my_window, text='Temperature:'.ljust(0,padding_char), font='courier 45', fg='gray')
 temp_title_label.grid(row=3, column=0, sticky='W')
 update_temp_title_label()
 
@@ -217,12 +238,12 @@ update_temp_unit_label()
 
 
 # Create min_temp_title_label widget
-min_temp_title_label = tk.Label(my_window, text='Min. Temperature'.ljust(23,padding_char), font='courier 45', fg='gray')
+min_temp_title_label = tk.Label(my_window, text='Min. Temperature:'.ljust(0,padding_char), font='courier 45', fg='gray')
 min_temp_title_label.grid(row=4, column=0, sticky='W')
 update_min_temp_title_label()
 
 # Create max_temp_title_label widget
-max_temp_title_label = tk.Label(my_window, text='Max. Temperature'.ljust(23,padding_char), font='courier 45', fg='gray')
+max_temp_title_label = tk.Label(my_window, text='Max. Temperature:'.ljust(0,padding_char), font='courier 45', fg='gray')
 max_temp_title_label.grid(row=5, column=0, sticky='W')
 update_max_temp_title_label()
 
@@ -259,7 +280,15 @@ time_last_measurement_data_label = tk.Label(my_window, font = 'ariel 25', fg ='g
 time_last_measurement_data_label.grid(row=100, column=2, columnspan=2)
 update_time_last_measurement_data_label()
 
+# Create time_min_temp_label widget
+time_min_temp_label = tk.Label(my_window, font = 'ariel 25', fg ='gray')
+time_min_temp_label.grid(row=4, column=3)
+update_time_min_temp_label()
 
+# Create time_max_temp_label widget
+time_max_temp_label = tk.Label(my_window, font = 'ariel 25', fg ='gray')
+time_max_temp_label.grid(row=5, column=3)
+update_time_max_temp_label()
 
 # Initiate the window's main loop that waits for user's actions
 my_window.mainloop()
