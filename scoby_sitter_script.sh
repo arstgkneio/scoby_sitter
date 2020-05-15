@@ -3,9 +3,9 @@
 # Assigns environment variable necessary for display program 
 export DISPLAY=:0.0 
 
-python3 /home/pi/BuchaMonitor/temp_output.py &
+python3 /home/pi/Git/scoby_sitter/temp_output.py &
 
-python3 /home/pi/BuchaMonitor/RaspBucha_Display.py &
+python3 /home/pi/Git/scoby_sitter/RaspBucha_Display.py &
 
 
 # to run on boot with crontab add "@reboot sleep 30 && <PATH_GOES_HERE>/buchamonitor_script.sh 2><PATH_GOES_HERE>/error_log.txt &"
