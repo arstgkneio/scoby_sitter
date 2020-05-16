@@ -45,11 +45,12 @@ def get_extrema(last_n_hours):
             datetimestamp = rec.split(',')[0]
 
             # ...and store it in a datetime object using the format defined earlier
+            rec_datetime = datetime.datetime.strptime(datetimestamp, "%Y-%m-%d %H:%M:%S.%f")
             #come up with a more delicate way of excluding header row
-            try:
-                rec_datetime = datetime.datetime.strptime(datetimestamp, "%Y-%m-%d %H:%M:%S.%f")
-            except ValueError:
-                continue
+            # try:
+            #     rec_datetime = datetime.datetime.strptime(datetimestamp, "%Y-%m-%d %H:%M:%S.%f")
+            # except ValueError:
+            #     continue
             # Calculate the age of the record
             current_datetime = datetime.datetime.now()
             rec_age = current_datetime - rec_datetime
@@ -76,7 +77,7 @@ def get_extrema(last_n_hours):
     dt_max_temperat = max(hour_range_data, key=hour_range_data.get)
     max_temperat = hour_range_data.get(dt_max_temperat)
 
-    # Convert datetimes to day, month, hour, minute format 
+    # Convert datetimes to day, month, hour, minute format
     dt_min_temperat = datetime.datetime.strptime(dt_min_temperat, "%Y-%m-%d %H:%M:%S.%f")
     dt_min_temperat = datetime.datetime.strftime(dt_min_temperat, "%d %b %H:%M")
 

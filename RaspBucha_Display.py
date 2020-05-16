@@ -102,10 +102,10 @@ def update_max_temp_title_label():
     max_temp_title_label.after(5000, update_max_temp_title_label)
 
 def update_min_temp_data_label():
-    min_temperat, dt_min_temperat, min_temperat, dt_min_temperat = extrema.get_extrema(last_n_hours = MIN_MAX_TIME_RANGE)
+    min_temperat, dt_min_temperat, max_temperat, dt_max_temperat = extrema.get_extrema(last_n_hours = MIN_MAX_TIME_RANGE)
 
     min_temp_data_label['bg'] = update_bg_color('0')
-    #type(min_temperat)
+
     min_temp_data_label['text'] = "{:6.1f}".format(min_temperat)
 
     min_temp_data_label.after(5000, update_min_temp_data_label)
