@@ -57,7 +57,7 @@ def get_extrema(last_n_hours):
             # If the record's age is less or equal to the size of the sample window
             # store the record in a dictionary
             if(rec_age <= hour_range):
-                rec_temperature = rec.split(',')[1]
+                rec_temperature = float(rec.split(',')[1])
                 hour_range_data[datetimestamp] = rec_temperature
             else:
                 stop = True
@@ -72,7 +72,7 @@ def get_extrema(last_n_hours):
     dt_min_temperat = min(hour_range_data, key=hour_range_data.get)
     #print(dt_min_temperat)
     min_temperat = hour_range_data.get(dt_min_temperat)
-    #print(min_temperat)
+    print(type(min_temperat))
 
     dt_max_temperat = max(hour_range_data, key=hour_range_data.get)
     max_temperat = hour_range_data.get(dt_max_temperat)
