@@ -185,9 +185,9 @@ def log_buch_temp():
 ##### MAIN PROGRAM #####
 while True:
     bucha_temp = read_temp()
-    addNum(bucha_temp)
-    getMin()
-    getMax()
-    log_buch_temp()
+    # addNum(bucha_temp)
+    # getMin()
+    # getMax()
+    # log_buch_temp()
     print("recording successful")
     time.sleep(SLEEP_DURATION)
