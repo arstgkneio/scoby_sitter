@@ -188,6 +188,6 @@ while True:
     # addNum(bucha_temp)
     # getMin()
     # getMax()
-    # log_buch_temp()
-    print("recording successful")
+    log_buch_temp()
+    #print("recording successful")
     time.sleep(SLEEP_DURATION)
