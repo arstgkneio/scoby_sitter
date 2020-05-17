@@ -31,7 +31,7 @@ def get_extrema(last_n_hours):
     # included entries are greater than current time by at most the hour_range
     stop = False
     for file in reversed(file_list):
-        print(file)
+        #print(file)
         # For each input file create a file handle...
         data_filehandle = open(file, 'r')
 
@@ -72,7 +72,7 @@ def get_extrema(last_n_hours):
     dt_min_temperat = min(hour_range_data, key=hour_range_data.get)
     #print(dt_min_temperat)
     min_temperat = hour_range_data.get(dt_min_temperat)
-    print(type(min_temperat))
+    #print(type(min_temperat))
 
     dt_max_temperat = max(hour_range_data, key=hour_range_data.get)
     max_temperat = hour_range_data.get(dt_max_temperat)
