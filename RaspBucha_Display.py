@@ -150,7 +150,7 @@ def update_time_last_measurement_data_label():
     dt_latest = raw_data_line.split(',')[0]
     dt_latest_obj = datetime.datetime.strptime(dt_latest, "%Y-%m-%d %H:%M:%S.%f")
     time_last_measurement = dt_latest_obj.strftime("%I:%M:%S %p")
-    time_last_measurement_data_label['text'] = time_last_measurement
+    time_last_measurement_data_label['text'] = "{:>15s}".format(time_last_measurement)
 
     time_last_measurement_data_label['bg'] = update_bg_color('0')
 
@@ -166,7 +166,7 @@ def update_time_min_temp_label():
 
     time_min_temp_label['bg'] = update_bg_color('0')
 
-    time_min_temp_label['text'] = "{:s}".format(dt_min_temperat)
+    time_min_temp_label['text'] = "{:>15s}".format(dt_min_temperat)
 
     time_min_temp_label.after(5000, update_time_min_temp_label)
 
@@ -175,7 +175,7 @@ def update_time_max_temp_label():
 
     time_max_temp_label['bg'] = update_bg_color('0')
 
-    time_max_temp_label['text'] = "{:s}".format(dt_max_temperat)
+    time_max_temp_label['text'] = "{:>15s}".format(dt_max_temperat)
 
     time_max_temp_label.after(5000, update_time_max_temp_label)
 
@@ -207,12 +207,13 @@ my_window.wm_attributes('-fullscreen',fullscreen_boolean)
 
 # Create the title_label widget
 title_label = tk.Label(my_window, text='Kombucha Monitor', font='ariel 70', fg='white')
-title_label.grid(row=0, column=0, columnspan=2)
+title_label.grid(row=1, column=0, columnspan=4)
+#title_label.pack(side="top")
 update_title_label()
 
 # Create the clock_label widget
 clock_label = tk.Label(my_window, font='ariel 25', fg='gray')
-clock_label.grid(row=100, column=0, columnspan=1)
+clock_label.grid(row=0, column=0, columnspan=4)
 display_time()
 update_clock_label()
 
@@ -268,23 +269,23 @@ update_max_temp_unit_label()
 
 
 # Create time_last_measurement_label widget
-time_last_measurement_label = tk.Label(my_window, text = 'updated:', font = 'courier 25', fg='gray')
-time_last_measurement_label.grid(row=100, column=1)
-update_time_last_measurement_label()
+#time_last_measurement_label = tk.Label(my_window, text = 'updated:', font = 'courier 25', fg='gray')
+#time_last_measurement_label.grid(row=100, column=1)
+#update_time_last_measurement_label()
 
 # Create time_last_measurement_data_label widget
 time_last_measurement_data_label = tk.Label(my_window, font = 'ariel 25', fg ='gray')
-time_last_measurement_data_label.grid(row=100, column=2, columnspan=2)
+time_last_measurement_data_label.grid(row=3, column=3, columnspan=2, sticky='W')
 update_time_last_measurement_data_label()
 
 # Create time_min_temp_label widget
 time_min_temp_label = tk.Label(my_window, font = 'ariel 25', fg ='gray')
-time_min_temp_label.grid(row=4, column=3)
+time_min_temp_label.grid(row=4, column=3, sticky='W')
 update_time_min_temp_label()
 
 # Create time_max_temp_label widget
 time_max_temp_label = tk.Label(my_window, font = 'ariel 25', fg ='gray')
-time_max_temp_label.grid(row=5, column=3)
+time_max_temp_label.grid(row=5, column=3, sticky='W')
 update_time_max_temp_label()
 
 # Initiate the window's main loop that waits for user's actions
