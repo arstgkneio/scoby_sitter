@@ -4,7 +4,7 @@ import glob
 import inspect
 
 #===============================================================================
-#TODO: get all keys which correspond to min/max values, if there is more than 1
+#TODO: get all times which correspond to min/max values, if there is more than 1
 #===============================================================================
 #===============================================================================
 #TODO: calculate relative time in hours/minutes if relative_time = True
