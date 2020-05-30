@@ -206,7 +206,7 @@ my_window.wm_attributes('-fullscreen',fullscreen_boolean)
 #my_window.wm_attributes('-topmost','true')
 
 # Create the title_label widget
-title_label = tk.Label(my_window, text='Kombucha Monitor', font='ariel 70', fg='white')
+title_label = tk.Label(my_window, text='Kombucha Temperature', font='ariel 70', fg='white')
 title_label.grid(row=1, column=0, columnspan=4)
 #title_label.pack(side="top")
 update_title_label()
@@ -219,7 +219,7 @@ update_clock_label()
 
 
 # Create the temp_title_label widget
-temp_title_label = tk.Label(my_window, text='Temperature:'.ljust(0,padding_char), font='courier 45', fg='gray')
+temp_title_label = tk.Label(my_window, text='Now:'.ljust(0,padding_char), font='courier 45', fg='gray')
 temp_title_label.grid(row=3, column=0, sticky='W')
 update_temp_title_label()
 
@@ -236,12 +236,12 @@ update_temp_unit_label()
 
 
 # Create min_temp_title_label widget
-min_temp_title_label = tk.Label(my_window, text='Min. Temperature:'.ljust(0,padding_char), font='courier 45', fg='gray')
+min_temp_title_label = tk.Label(my_window, text='Low:'.ljust(0,padding_char), font='courier 45', fg='gray')
 min_temp_title_label.grid(row=4, column=0, sticky='W')
 update_min_temp_title_label()
 
 # Create max_temp_title_label widget
-max_temp_title_label = tk.Label(my_window, text='Max. Temperature:'.ljust(0,padding_char), font='courier 45', fg='gray')
+max_temp_title_label = tk.Label(my_window, text='High:'.ljust(0,padding_char), font='courier 45', fg='gray')
 max_temp_title_label.grid(row=5, column=0, sticky='W')
 update_max_temp_title_label()
 
