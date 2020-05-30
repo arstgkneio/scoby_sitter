@@ -4,7 +4,7 @@ import glob
 import inspect
 
 #===============================================================================
-#TODO: get all keys which correspond to min/max values, if there is more than 1
+#TODO: get all times which correspond to min/max values, if there is more than 1
 #===============================================================================
 #===============================================================================
 #TODO: calculate relative time in hours/minutes if relative_time = True
@@ -30,8 +30,8 @@ def get_extrema(last_n_hours):
 
     # included entries are greater than current time by at most the hour_range
     stop = False
-    for file in file_list:
-
+    for file in reversed(file_list):
+        #print(file)
         # For each input file create a file handle...
         data_filehandle = open(file, 'r')
 
@@ -45,6 +45,7 @@ def get_extrema(last_n_hours):
             datetimestamp = rec.split(',')[0]
 
             # ...and store it in a datetime object using the format defined earlier
+            #rec_datetime = datetime.datetime.strptime(datetimestamp, "%Y-%m-%d %H:%M:%S.%f")
             #come up with a more delicate way of excluding header row
             try:
                 rec_datetime = datetime.datetime.strptime(datetimestamp, "%Y-%m-%d %H:%M:%S.%f")
@@ -56,7 +57,7 @@ def get_extrema(last_n_hours):
             # If the record's age is less or equal to the size of the sample window
             # store the record in a dictionary
             if(rec_age <= hour_range):
-                rec_temperature = rec.split(',')[1]
+                rec_temperature = float(rec.split(',')[1])
                 hour_range_data[datetimestamp] = rec_temperature
             else:
                 stop = True
@@ -68,15 +69,24 @@ def get_extrema(last_n_hours):
             break
 
     # Finding min/max values in dictionary and corresponding key
-
     dt_min_temperat = min(hour_range_data, key=hour_range_data.get)
+    #print(dt_min_temperat)
     min_temperat = hour_range_data.get(dt_min_temperat)
+    #print(type(min_temperat))
 
     dt_max_temperat = max(hour_range_data, key=hour_range_data.get)
     max_temperat = hour_range_data.get(dt_max_temperat)
 
+    # Convert datetimes to day, month, hour, minute format
+    dt_min_temperat = datetime.datetime.strptime(dt_min_temperat, "%Y-%m-%d %H:%M:%S.%f")
+    dt_min_temperat = datetime.datetime.strftime(dt_min_temperat, "%d %b %H:%M")
+
+
+    dt_max_temperat = datetime.datetime.strptime(dt_max_temperat, "%Y-%m-%d %H:%M:%S.%f")
+    dt_max_temperat = datetime.datetime.strftime(dt_max_temperat, "%d %b %H:%M")
 
     return(float(min_temperat), dt_min_temperat, float(max_temperat), dt_max_temperat)
+
 #
 # min_temperat, dt_min_temperat, max_temperat, dt_max_temperat = get_extrema()
 #

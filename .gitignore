@@ -1,0 +1,3 @@
+#ignore directories 
+**/bucha_logs
+**/__pychache__
