@@ -13,12 +13,14 @@ import atexit
 
 ### SETTINGS ###
 
-lower_temp_limit = 22
-
-upper_temp_limit = 24
 
 # temp sensor settings
+
 SLEEP_DURATION = 120 #seconds
+
+lower_temp_limit = 22 #celcius
+upper_temp_limit = 24
+
 log_name_prefix = "bucha_log"
 module_path = inspect.getfile(inspect.currentframe())
 module_dir = os.path.realpath(os.path.dirname(module_path))
