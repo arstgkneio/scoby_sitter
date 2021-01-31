@@ -16,10 +16,10 @@ import atexit
 
 # temp sensor settings
 
-SLEEP_DURATION = 120 #seconds
+SLEEP_DURATION = 10 #seconds
 
-lower_temp_limit = 22 #celcius
-upper_temp_limit = 24
+lower_temp_limit = 24 #celcius
+upper_temp_limit = 26
 
 log_name_prefix = "bucha_log"
 module_path = inspect.getfile(inspect.currentframe())
@@ -125,8 +125,8 @@ try:
 except KeyboardInterrupt:
     print("keyboard interrupt")
     
-#except:
-#    print("an error or exception occurred")
+except:
+    print("an error or exception occurred")
 
 finally:
     GPIO.cleanup()
